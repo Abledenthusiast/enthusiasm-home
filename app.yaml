@@ -1,0 +1,28 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /(.*\.(css|js|woff|woff2|ico|png|jpg))
+  static_files: public/\1
+  upload: public/(.*)
+  expiration: "14d"
+  secure: always
+
+- url: /(.*\..*)
+  static_files: public/\1
+  upload: public/(.*)
+  secure: always
+
+# assume file without extensions use index.html
+- url: /(.*)/
+  static_files: public/\1/index.html
+  upload: public/(.*)/index.html
+  secure: always
+
+- url: /
+  static_files: public/index.html
+  upload: public/index.html
+  secure: always
+  
